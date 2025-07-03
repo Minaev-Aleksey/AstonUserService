@@ -1,42 +1,20 @@
-package com.example.Aston_traine2.entity;
-
-import jakarta.persistence.*;
+package com.example.Aston_traine2.dto;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-@Entity
-@Table(name = "dz_user")
-
-public class User {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
+public class UserResponseDTO {
+    private Long Id;
     private String name;
-
-    @Column(name = "email", nullable = false, unique = true)
     private String email;
-
-    @Column(name = "age", nullable = false)
     private int age;
-
-    @Column(name = "created_at", nullable = false)
     private LocalDate localDate = LocalDate.now();
 
-    public User() {
+    public UserResponseDTO() {
     }
 
-    public User(Long id, String name, String email, int age, LocalDate localDate) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.age = age;
-        this.localDate = localDate;
-    }
-
-    public User(String name, String email, int age, LocalDate localDate) {
+    public UserResponseDTO(Long id, String name, String email, int age, LocalDate localDate) {
+        Id = id;
         this.name = name;
         this.email = email;
         this.age = age;
@@ -44,11 +22,11 @@ public class User {
     }
 
     public Long getId() {
-        return id;
+        return Id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        Id = id;
     }
 
     public String getName() {
@@ -84,9 +62,21 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        UserResponseDTO that = (UserResponseDTO) o;
+        return age == that.age && Objects.equals(Id, that.Id) && Objects.equals(name, that.name) && Objects.equals(email, that.email) && Objects.equals(localDate, that.localDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, name, email, age, localDate);
+    }
+
+    @Override
     public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
+        return "UserResponseDTO{" +
+                "Id=" + Id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
