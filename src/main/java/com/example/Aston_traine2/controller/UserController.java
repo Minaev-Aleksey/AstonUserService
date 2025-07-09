@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userRequestDTO){
+    public ResponseEntity<UserResponseDTO> createUser(@RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO createUser = userService.createUser(userRequestDTO);
         return new ResponseEntity<>(createUser, HttpStatus.CREATED);
     }
@@ -28,25 +28,26 @@ public class UserController {
     @PutMapping("/users/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(
             @PathVariable Long id,
-            @RequestBody UserRequestDTO userRequestDTO){
+            @RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO updateUser = userService.updateUser(id, userRequestDTO);
         return ResponseEntity.ok(updateUser);
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long id){
+    public ResponseEntity<UserResponseDTO> getUser(@PathVariable Long id) {
         UserResponseDTO user = userService.findByIdUser(id);
         return ResponseEntity.ok(user);
     }
 
+
     @GetMapping("/users")
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers(){
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         List<UserResponseDTO> users = userService.findAllUsers();
         return ResponseEntity.ok(users);
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable Long id){
+    public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }

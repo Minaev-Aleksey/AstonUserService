@@ -3,11 +3,11 @@ package com.example.Aston_traine2.service.impl;
 import com.example.Aston_traine2.dto.UserRequestDTO;
 import com.example.Aston_traine2.dto.UserResponseDTO;
 import com.example.Aston_traine2.exception.UserNotFoundException;
+import com.example.Aston_traine2.kafka.KafkaMessageService;
 import com.example.Aston_traine2.model.User;
 import com.example.Aston_traine2.repository.UserRepository;
 import com.example.Aston_traine2.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +17,20 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final KafkaMessageService kafkaMessageService;
 
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, KafkaMessageService kafkaMessageService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.kafkaMessageService = kafkaMessageService;
     }
 
     @Override
     public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
         User user = modelMapper.map(userRequestDTO, User.class);
         User createNewUser = userRepository.save(user);
+
+        kafkaMessageService.sendUserEvent("USER_CREATED", createNewUser.getEmail());
         return modelMapper.map(createNewUser, UserResponseDTO.class);
     }
 
@@ -56,9 +60,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Long id) {
-        if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("Пользователь с id " + id + " не найден");
-        }
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        String userEmail = user.getEmail();
+
+        userRepository.delete(user);
+        kafkaMessageService.sendUserEvent("USER_DELETED", userEmail);
     }
 }

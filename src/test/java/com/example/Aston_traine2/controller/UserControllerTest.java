@@ -1,4 +1,4 @@
-package com.example.Aston_traine2.control;
+package com.example.Aston_traine2.controller;
 
 
 import com.example.Aston_traine2.dto.UserRequestDTO;
@@ -6,6 +6,7 @@ import com.example.Aston_traine2.dto.UserResponseDTO;
 import com.example.Aston_traine2.exception.UserNotFoundException;
 import com.example.Aston_traine2.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -22,7 +24,9 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -115,4 +119,32 @@ public class UserControllerTest {
         verify(userService, times(1)).deleteUser(userId);
 
     }
+
+    @Test
+    public void getUserByIdNotFoundTest() throws Exception {
+        Long id = 99L;
+        when(userService.findByIdUser(id)).thenThrow(new UserNotFoundException("Пользователь с Id" + id + " не найден"));
+
+
+        mockMvc.perform(get("/users/{id}", id))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+//                .andExpect(jsonPath("$.status").value(404))
+//                .andExpect(jsonPath("$.exception").value("UserNotFoundException"))
+//                .andExpect(jsonPath("$.message").value("Пользователь с Id" + id + " не найден"));
+
+
+    }
+
+    @Test
+    public void getUserByIdNotFoundTest2() throws Exception {
+        Long id = 99L;
+
+        when(userService.findByIdUser(id)).thenThrow(new UserNotFoundException("Пользователь с Id" + id + " не найден"));
+
+        MvcResult result = mockMvc.perform(get("/users/{id}", id)).andReturn();
+
+        Assertions.assertEquals(404, result.getResponse().getStatus());
+    }
+
 }
