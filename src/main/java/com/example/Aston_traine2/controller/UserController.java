@@ -23,7 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Operation(summary = "Создание нового пользователя")
+    @Operation(summary = "Создание нового пользователя", description = "Создает нового пользователя и записывает его в БД")
     @ApiResponse(responseCode = "200", description = "Новый пользователь создан")
     @ApiResponse(responseCode = "404", description = "Новый пользователь не создан")
     @PostMapping("/users")
@@ -32,7 +32,7 @@ public class UserController {
         return new ResponseEntity<>(createUser, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Обновление данных пользователя")
+    @Operation(summary = "Обновление данных пользователя", description = "Обновляет данные пользователя по указанному ID")
     @ApiResponse(responseCode = "200", description = "Данные пользователя обновлены")
     @ApiResponse(responseCode = "404", description = "Данные пользователя не обновлены")
     @PutMapping("/users/{id}")
@@ -43,7 +43,7 @@ public class UserController {
         return ResponseEntity.ok(updateUser);
     }
 
-    @Operation(summary = "Получить пользователя по ID")
+    @Operation(summary = "Получить пользователя по ID", description = "Возвращает пользователя по указанному ID")
     @ApiResponse(responseCode = "200", description = "Пользователь найден")
     @ApiResponse(responseCode = "404", description = "Пользователь не найден")
     @GetMapping("/users/{id}")
@@ -52,7 +52,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @Operation(summary = "Получение всех пользователей")
+    @Operation(summary = "Получение всех пользователей", description = "Возвращает всех пользователй из БД")
     @ApiResponse(responseCode = "200", description = "Пользователи найдены")
     @ApiResponse(responseCode = "404", description = "Пользователи не найдены")
     @GetMapping("/users")
@@ -61,7 +61,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @Operation(summary = "Удаление пользователя по ID")
+    @Operation(summary = "Удаление пользователя по ID", description = "Удаляет пользователя из БД с указанным ID")
     @ApiResponse(responseCode = "200", description = "Пользователь удален")
     @ApiResponse(responseCode = "404", description = "Пользователь для удаления не найден")
     @DeleteMapping("/users/{id}")

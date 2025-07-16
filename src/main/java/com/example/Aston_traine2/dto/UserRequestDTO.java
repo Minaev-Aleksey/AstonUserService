@@ -1,11 +1,15 @@
 package com.example.Aston_traine2.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class UserRequestDTO {
 
+    @Schema(name = "Уникальный идентификатор", example = "1")
     private Long id;
+    @Schema(name = "Имя пользователя", example = "Алексей")
     private String name;
     private String email;
     private int age;
