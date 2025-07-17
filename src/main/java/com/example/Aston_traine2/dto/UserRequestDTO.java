@@ -11,8 +11,11 @@ public class UserRequestDTO {
     private Long id;
     @Schema(name = "Имя пользователя", example = "Алексей")
     private String name;
+    @Schema(name = "Электронная почта пользователя", example = "example@mail.ru")
     private String email;
+    @Schema(name = "Возраст пользователя", example = "18")
     private int age;
+    @Schema(name = "Дата создания пользователя устанавливается автоматически", example = "2025-07-07")
     private LocalDate localDate = LocalDate.now();
 
     public UserRequestDTO() {
