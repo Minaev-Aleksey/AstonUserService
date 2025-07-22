@@ -8,4 +8,9 @@ spring:
         git:
           uri: https://github.com/your-github/config-repo  # Укажите свой репозиторий с конфигами
           search-paths: configs  # Папка с конфигами
-          clone-on-start: true   # Клонировать репозиторий при старте
+          clone-on-start: true # Клонировать репозиторий при старте
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
