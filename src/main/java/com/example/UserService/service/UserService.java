@@ -1,7 +1,7 @@
-package com.example.Aston_traine2.service;
+package com.example.UserService.service;
 
-import com.example.Aston_traine2.dto.UserRequestDTO;
-import com.example.Aston_traine2.dto.UserResponseDTO;
+import com.example.UserService.dto.UserRequestDTO;
+import com.example.UserService.dto.UserResponseDTO;
 
 import java.util.List;
 

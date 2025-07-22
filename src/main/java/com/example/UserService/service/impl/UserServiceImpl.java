@@ -1,12 +1,12 @@
-package com.example.Aston_traine2.service.impl;
+package com.example.UserService.service.impl;
 
-import com.example.Aston_traine2.dto.UserRequestDTO;
-import com.example.Aston_traine2.dto.UserResponseDTO;
-import com.example.Aston_traine2.exception.UserNotFoundException;
-import com.example.Aston_traine2.kafka.KafkaMessageService;
-import com.example.Aston_traine2.model.User;
-import com.example.Aston_traine2.repository.UserRepository;
-import com.example.Aston_traine2.service.UserService;
+import com.example.UserService.dto.UserRequestDTO;
+import com.example.UserService.dto.UserResponseDTO;
+import com.example.UserService.exception.UserNotFoundException;
+import com.example.UserService.kafka.KafkaMessageService;
+import com.example.UserService.model.User;
+import com.example.UserService.repository.UserRepository;
+import com.example.UserService.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.example.Aston_traine2.dto;
+package com.example.UserService.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

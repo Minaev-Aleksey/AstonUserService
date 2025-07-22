@@ -1,10 +1,10 @@
-package com.example.Aston_traine2.controller;
+package com.example.UserService.controller;
 
 
-import com.example.Aston_traine2.dto.UserRequestDTO;
-import com.example.Aston_traine2.dto.UserResponseDTO;
-import com.example.Aston_traine2.exception.UserNotFoundException;
-import com.example.Aston_traine2.service.UserService;
+import com.example.UserService.dto.UserRequestDTO;
+import com.example.UserService.dto.UserResponseDTO;
+import com.example.UserService.exception.UserNotFoundException;
+import com.example.UserService.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -129,11 +129,6 @@ public class UserControllerTest {
         mockMvc.perform(get("/users/{id}", id))
                 .andDo(print())
                 .andExpect(status().isNotFound());
-//                .andExpect(jsonPath("$.status").value(404))
-//                .andExpect(jsonPath("$.exception").value("UserNotFoundException"))
-//                .andExpect(jsonPath("$.message").value("Пользователь с Id" + id + " не найден"));
-
-
     }
 
     @Test

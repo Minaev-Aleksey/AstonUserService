@@ -1,4 +1,4 @@
-package com.example.Aston_traine2.kafka;
+package com.example.UserService.kafka;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,8 @@
-package com.example.Aston_traine2.controller;
+package com.example.UserService.controller;
 
-import com.example.Aston_traine2.dto.UserRequestDTO;
-import com.example.Aston_traine2.dto.UserResponseDTO;
-import com.example.Aston_traine2.service.UserService;
+import com.example.UserService.dto.UserRequestDTO;
+import com.example.UserService.dto.UserResponseDTO;
+import com.example.UserService.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

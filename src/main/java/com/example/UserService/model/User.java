@@ -1,4 +1,4 @@
-package com.example.Aston_traine2.model;
+package com.example.UserService.model;
 
 import jakarta.persistence.*;
 

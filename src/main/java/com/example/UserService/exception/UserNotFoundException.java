@@ -1,4 +1,4 @@
-package com.example.Aston_traine2.exception;
+package com.example.UserService.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

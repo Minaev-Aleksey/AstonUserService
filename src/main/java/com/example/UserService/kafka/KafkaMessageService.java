@@ -1,4 +1,4 @@
-package com.example.Aston_traine2.kafka;
+package com.example.UserService.kafka;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;

@@ -1,4 +1,4 @@
-package com.example.Aston_traine2;
+package com.example.UserService;
 
 
 import io.swagger.v3.oas.models.OpenAPI;
@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class AstonTraine2Application {
+public class UserServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AstonTraine2Application.class, args);
+        SpringApplication.run(UserServiceApplication.class, args);
 
     }
 
