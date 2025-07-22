@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim as builder
 RUN apt-get update && apt-get install -y maven git
 
 # Клонируем репозиторий
-RUN git clone https://github.com/Minaev-Aleksey/AstonUserService.git /app
+# RUN git clone https://github.com/Minaev-Aleksey/AstonUserService.git /AstonUserService
 
 # Переходим в рабочую директорию
-WORKDIR /app
+WORKDIR /AstonUserService
 
 # Собираем проект с помощью Maven
 RUN mvn clean package
@@ -17,10 +17,10 @@ RUN mvn clean package
 FROM openjdk:17-jdk-slim
 
 # Копируем собранный JAR из первого этапа
-COPY --from=builder /app/target/UserService.jar /app/app.jar
+COPY --from=builder /AstonUserService/target/UserService.jar /AstonUserService/app.jar
 
 # Открываем порт, который использует приложение
 EXPOSE 8082
 
 # Запускаем приложение
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/AstonUserService/app.jar"]
