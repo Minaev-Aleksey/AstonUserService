@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO updateUser(Long id, UserRequestDTO userRequestDTO) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Пользователь с id " + id + " не найден"));
+                .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found"));
 
         modelMapper.map(userRequestDTO, user);
         User updateUser = userRepository.save(user);
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseDTO findByIdUser(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Пользователь с id " + id + " не найден"));
+                .orElseThrow(() -> new UserNotFoundException("User with ID " + id + " not found"));
 
         return modelMapper.map(user, UserResponseDTO.class);
     }

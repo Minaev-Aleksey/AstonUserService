@@ -19,7 +19,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-@Tag(name = "User API", description = "Управление пользователями")
+@Tag(name = "User API", description = "Users controller")
 @RequestMapping("/api")
 public class UserController {
 
@@ -29,9 +29,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Operation(summary = "Создание нового пользователя", description = "Создает нового пользователя и записывает его в БД")
-    @ApiResponse(responseCode = "200", description = "Новый пользователь создан")
-    @ApiResponse(responseCode = "404", description = "Новый пользователь не создан")
+    @Operation(summary = "Create new user", description = "Creates a new user and writes it to the database")
+    @ApiResponse(responseCode = "200", description = "New user is created")
+    @ApiResponse(responseCode = "404", description = "New user is not created")
     @PostMapping("/users")
     public ResponseEntity<EntityModel<UserResponseDTO>> createUser(@RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO createUser = userService.createUser(userRequestDTO);
@@ -40,9 +40,9 @@ public class UserController {
                 .body(toEntityModel(createUser));
     }
 
-    @Operation(summary = "Обновление данных пользователя", description = "Обновляет данные пользователя по указанному ID")
-    @ApiResponse(responseCode = "200", description = "Данные пользователя обновлены")
-    @ApiResponse(responseCode = "404", description = "Данные пользователя не обновлены")
+    @Operation(summary = "Updating user data", description = "Updates the user's data by the specified ID")
+    @ApiResponse(responseCode = "200", description = "The user's data has been updated")
+    @ApiResponse(responseCode = "404", description = "User data has not been updated")
     @PutMapping("/users/{id}")
     public ResponseEntity<EntityModel<UserResponseDTO>> updateUser(
             @PathVariable Long id,
@@ -52,9 +52,9 @@ public class UserController {
         return ResponseEntity.ok(toEntityModel(updatedUser));
     }
 
-    @Operation(summary = "Получить пользователя по ID", description = "Возвращает пользователя по указанному ID")
-    @ApiResponse(responseCode = "200", description = "Пользователь найден")
-    @ApiResponse(responseCode = "404", description = "Пользователь не найден")
+    @Operation(summary = "Get a user by ID", description = "Returns the user by the specified ID")
+    @ApiResponse(responseCode = "200", description = "The user has been found")
+    @ApiResponse(responseCode = "404", description = "The user has not been found")
     @GetMapping("/users/{id}")
     public EntityModel<UserResponseDTO> getUser(@PathVariable Long id) {
         UserResponseDTO user = userService.findByIdUser(id);
@@ -63,9 +63,9 @@ public class UserController {
                 linkTo(methodOn(UserController.class).getAllUsers()).withRel("users"));
     }
 
-    @Operation(summary = "Получение всех пользователей", description = "Возвращает всех пользователй из БД")
-    @ApiResponse(responseCode = "200", description = "Пользователи найдены")
-    @ApiResponse(responseCode = "404", description = "Пользователи не найдены")
+    @Operation(summary = "Getting all users", description = "Returns all users from the database")
+    @ApiResponse(responseCode = "200", description = "Users found")
+    @ApiResponse(responseCode = "404", description = "Users not found")
     @GetMapping("/users")
     public CollectionModel<EntityModel<UserResponseDTO>> getAllUsers() {
         List<EntityModel<UserResponseDTO>> users = userService.findAllUsers().stream()
@@ -77,9 +77,9 @@ public class UserController {
                 linkTo(methodOn(UserController.class).getAllUsers()).withSelfRel());
     }
 
-    @Operation(summary = "Удаление пользователя по ID", description = "Удаляет пользователя из БД с указанным ID")
-    @ApiResponse(responseCode = "200", description = "Пользователь удален")
-    @ApiResponse(responseCode = "404", description = "Пользователь для удаления не найден")
+    @Operation(summary = "Deleting a user by ID", description = "Deletes a user from the database with the specified ID")
+    @ApiResponse(responseCode = "200", description = "The user has been deleted")
+    @ApiResponse(responseCode = "404", description = "The user has not been deleted")
     @DeleteMapping("/users/{id}")
     public ResponseEntity<UserResponseDTO> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
