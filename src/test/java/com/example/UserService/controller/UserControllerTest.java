@@ -89,7 +89,6 @@
 //
 //    @Test
 //    public void testUpdateUser() throws Exception {
-//        // Подготовка мок-данных
 //        UserResponseDTO user1 = new UserResponseDTO(1L, "user1", "user1@example.com", 111, LocalDate.now());
 //        user1.setName("updatedUser");
 //        user1.setEmail("updated@example.com");
@@ -97,7 +96,6 @@
 //        when(userService.updateUser(anyLong(), any(UserRequestDTO.class))).thenReturn(user1);
 //
 //
-//        // Выполнение запроса и проверки
 //        mockMvc.perform(put("/api/users/{id}", user1.getId())
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .content(objectMapper.writeValueAsString(user1)))
