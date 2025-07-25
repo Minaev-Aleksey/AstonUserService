@@ -1,7 +1,9 @@
 spring:
+  config:
+    import: optional:configserver:http://config-server:8888
   application:
     name: user-service
   cloud:
     config:
-      uri: http://localhost:8888  # Адрес Config Server
-      fail-fast: true
+      uri: http://config-server:8888
+      fail-fast: false
